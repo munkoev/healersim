@@ -8,31 +8,31 @@
   grid-auto-rows: minmax(100px, auto);
 }
 .bar-boss {
-  background-color: yellow;
+  background-color: none;
 }
 .bar-tank {
-  background-color: darkgrey;
+  background-color: none;
 }
 .bar-dps {
-  background-color: green;
+  background-color: none;
 }
 .bar-healer {
-  background-color: darkseagreen;
+  background-color: none;
 }
 .bar-mana {
-  background-color: blue;
+  background-color: none;
   color: white;
 }
 [class^=bar] {
-  padding: 30px;
-  border: 1px solid blue;
+  padding: 20px;
+  border: 0px solid blue;
   text-align: center;
   align-self: center;
 }
 .spell {
   background-color: gold;
-  padding: 20px;
-    text-align: center;
+  padding: 0px;
+  text-align: left;
   align-self: start;
   border: 1px solid blue;
 }
@@ -47,4 +47,65 @@ body {
     background:
     url("arts/bg.jpg"),
     center / cover;
+}
+#progressBar-boss {
+    width: auto;
+    height: 4rem;
+    border: 0rem brown;
+    margin-top: 0rem;
+    background-color: #FF7F50;
+}
+#progressBarFull-boss {
+    height: 4rem;
+    background-color: brown;
+    width: 0%;
+}
+#progressBar-tank {
+    width: auto;
+    height: 4rem;
+    border: 0rem brown;
+    margin-top: 0rem;
+    background-color: Moccasin;
+}
+#progressBarFull-tank {
+    height: 4rem;
+    background-color: olive;
+    width: 0%;
+}
+[id^=progressBar-dps] {
+    width: auto;
+    height: 4rem;
+    border: 0rem brown;
+    margin-top: 0rem;
+    background-color: DarkSeaGreen;
+}
+[id^=progressBarFull-dps] {
+    height: 4rem;
+    background-color: ForestGreen;
+    width: 0%;
+}
+#progressBar-healer {
+    width: auto;
+    height: 4rem;
+    border: 0rem brown;
+    margin-top: 0rem;
+    background-color: LightSteelBlue;
+}
+#progressBarFull-healer {
+    height: 4rem;
+    background-color: LightSlateGray;
+    width: 0%;
+}
+
+#progressBar-mana {
+    width: auto;
+    height: 4rem;
+    border: 0rem brown;
+    margin-top: 0rem;
+    background-color: Gainsboro;
+}
+#progressBarFull-mana {
+    height: 4rem;
+    background-color: DarkSlateBlue;
+    width: 0%;
 }
