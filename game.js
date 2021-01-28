@@ -8,7 +8,7 @@ let tankCurHP = textTank = tankMaxHP = 100;
 tankHP.style.width = `${(tankCurHP / tankMaxHP) * 100}%`;
 
 const mana = document.getElementById('progressBarFull-mana');
-let manaCur = textMana = manaMax = 2500;
+let manaCur = textMana = manaMax = 2300;
 mana.style.width = `${(manaCur / manaMax) * 100}%`;
 
 const dps1HP = document.getElementById('progressBarFull-dps1');
@@ -70,6 +70,7 @@ let refreshID = setInterval(() => {
   document.getElementById('text-boss').innerText = `${Math.round(bossCurHP / bossMaxHP * 100)}%`;
   if (bossCurHP <= 0) {
     clearInterval(refreshID);
+    clearInterval(refreshID2);
     alert("You win");
 }
   tankDMG();
@@ -77,6 +78,7 @@ let refreshID = setInterval(() => {
   document.getElementById('text-tank').innerText = `${Math.round(tankCurHP / tankMaxHP * 100)}%`;
   if (tankCurHP <= 0) {
     clearInterval(refreshID);
+    clearInterval(refreshID2);
     alert("You loose");
 }
   mana.style.width = `${(manaCur / manaMax) * 100}%`;
