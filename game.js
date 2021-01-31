@@ -1,231 +1,165 @@
 //declare
-const bossHP = document.getElementById('progressBarFull-boss');
-let bossCurHP = textBoss = bossMaxHP = 1000;
-bossHP.style.width = `${(bossCurHP / bossMaxHP) * 100}%`;
-
-const tankHP = document.getElementById('progressBarFull-tank');
-let tankCurHP = textTank = tankMaxHP = 100;
-tankHP.style.width = `${(tankCurHP / tankMaxHP) * 100}%`;
-
-const mana = document.getElementById('progressBarFull-mana');
-let manaCur = textMana = manaMax = 2300;
-mana.style.width = `${(manaCur / manaMax) * 100}%`;
-
-const dps1HP = document.getElementById('progressBarFull-dps1');
-let dps1CurHP = textDps1 = dps1MaxHP = 100;
-dps1HP.style.width = `${(dps1CurHP / dps1MaxHP) * 100}%`;
-
-const dps2HP = document.getElementById('progressBarFull-dps2');
-let dps2CurHP = textDps2 = dps2MaxHP = 100;
-dps2HP.style.width = `${(dps2CurHP / dps2MaxHP) * 100}%`;
-
-const dps3HP = document.getElementById('progressBarFull-dps3');
-let dps3CurHP = textDps3 = dps3MaxHP = 100;
-dps3HP.style.width = `${(dps3CurHP / dps3MaxHP) * 100}%`;
-
-const healerHP = document.getElementById('progressBarFull-healer');
-let healerCurHP = textHealer = healerMaxHP = 100;
-healerHP.style.width = `${(healerCurHP / healerMaxHP) * 100}%`;
-
-let i;
-
-//vspom func
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min; //Максимум не включается, минимум включается
-}
-
-function bossDecay() {
-  bossCurHP--;
-}
-function tankDMG() {
-  tankCurHP = tankCurHP - getRandomInt(1, 12)*0.1;
-}
-function dps1DMG() {
-  dps1CurHP = dps1CurHP - 20 * Math.floor(Math.random()*1.2) - 5 * Math.floor(Math.random()*1.5); //16% 33% (5% 25dmg)
-  dps1HP.style.width = `${(dps1CurHP / dps1MaxHP) * 100}%`;
-  document.getElementById('text-dps1').innerText = `${Math.round(dps1CurHP / dps1MaxHP * 100)}%`;
-}
-function dps2DMG() {
-  dps2CurHP = dps2CurHP - 20 * Math.floor(Math.random()*1.2) - 5 * Math.floor(Math.random()*1.5); //16% 33% (5% 25dmg)
-  dps2HP.style.width = `${(dps2CurHP / dps2MaxHP) * 100}%`;
-  document.getElementById('text-dps2').innerText = `${Math.round(dps2CurHP / dps2MaxHP * 100)}%`;
-}
-function dps3DMG() {
-  dps3CurHP = dps3CurHP - 20 * Math.floor(Math.random()*1.2) - 5 * Math.floor(Math.random()*1.5); //16% 33% (5% 25dmg)
-  dps3HP.style.width = `${(dps3CurHP / dps3MaxHP) * 100}%`;
-  document.getElementById('text-dps3').innerText = `${Math.round(dps3CurHP / dps3MaxHP * 100)}%`;
-}
-function healerDMG() {
-  healerCurHP = healerCurHP - 20 * Math.floor(Math.random()*1.2) - 5 * Math.floor(Math.random()*1.5); //16% 33% (5% 25dmg)
-  healerHP.style.width = `${(healerCurHP / healerMaxHP) * 100}%`;
-  document.getElementById('text-healer').innerText = `${Math.round(healerCurHP / healerMaxHP * 100)}%`;
-}
-
-//бесконечный цикл для постоянного дмг
-let refreshID = setInterval(() => {
-  bossDecay();
-  bossHP.style.width = `${(bossCurHP / bossMaxHP) * 100}%`;
-  document.getElementById('text-boss').innerText = `${Math.round(bossCurHP / bossMaxHP * 100)}%`;
-  if (bossCurHP <= 0) {
-    clearInterval(refreshID);
-    clearInterval(refreshID2);
-    alert("You win");
-}
-  tankDMG();
-  tankHP.style.width = `${(tankCurHP / tankMaxHP) * 100}%`;
-  document.getElementById('text-tank').innerText = `${Math.round(tankCurHP / tankMaxHP * 100)}%`;
-  if (tankCurHP <= 0) {
-    clearInterval(refreshID);
-    clearInterval(refreshID2);
-    alert("You loose");
-}
-  mana.style.width = `${(manaCur / manaMax) * 100}%`;
-  document.getElementById('text-mana').innerText = `${Math.round(manaCur / manaMax * 100)}%`;
-  dps1HP.style.width = `${(dps1CurHP / dps1MaxHP) * 100}%`;
-  document.getElementById('text-dps1').innerText = `${Math.round(dps1CurHP / dps1MaxHP * 100)}%`;
-  dps2HP.style.width = `${(dps2CurHP / dps2MaxHP) * 100}%`;
-  document.getElementById('text-dps2').innerText = `${Math.round(dps2CurHP / dps2MaxHP * 100)}%`;
-  dps3HP.style.width = `${(dps3CurHP / dps3MaxHP) * 100}%`;
-  document.getElementById('text-dps3').innerText = `${Math.round(dps3CurHP / dps3MaxHP * 100)}%`;
-  healerHP.style.width = `${(healerCurHP / healerMaxHP) * 100}%`;
-  document.getElementById('text-healer').innerText = `${Math.round(healerCurHP / healerMaxHP * 100)}%`;
-}, 100);
-//бесконечный цикл для непостоянного дмг
-let refreshID2 = setInterval(() => {
-  dps1DMG();
-  dps2DMG();
-  dps3DMG();
-  healerDMG();
-  if (dps1CurHP <= 0 || dps2CurHP <= 0 || dps3CurHP <= 0 || healerCurHP <=0) {
-    clearInterval(refreshID2);
-    clearInterval(refreshID);
-    alert("You loose");
-}
-}, 1000);
-
-//target handling
-
-const mouseTargettank = document.getElementById('bar2');
-const mouseTargetdps1 = document.getElementById('bar3');
-const mouseTargetdps2 = document.getElementById('bar4');
-const mouseTargetdps3 = document.getElementById('bar5');
-const mouseTargethealer = document.getElementById('bar6');
-let mouseTarget = '';
-
-mouseTargettank.addEventListener('mouseenter', e => {
-  mouseTargettank.style.outline = '5px solid red';
-  mouseTarget='tank';
-});
-mouseTargettank.addEventListener('mouseleave', e => {
-  mouseTargettank.style.outline = '0px brown';
-  mouseTarget = '';
-});
-
-mouseTargetdps1.addEventListener('mouseenter', e => {
-  mouseTargetdps1.style.outline = '5px solid red';
-  mouseTarget='dps1';
-});
-mouseTargetdps1.addEventListener('mouseleave', e => {
-  mouseTargetdps1.style.outline = '0px brown';
-  mouseTarget = '';
-});
-
-mouseTargetdps2.addEventListener('mouseenter', e => {
-  mouseTargetdps2.style.outline = '5px solid red';
-  mouseTarget='dps2';
-});
-mouseTargetdps2.addEventListener('mouseleave', e => {
-  mouseTargetdps2.style.outline = '0px brown';
-  mouseTarget = '';
-});
-
-mouseTargetdps3.addEventListener('mouseenter', e => {
-  mouseTargetdps3.style.outline = '5px solid red';
-  mouseTarget='dps3';
-});
-mouseTargetdps3.addEventListener('mouseleave', e => {
-  mouseTargetdps3.style.outline = '0px brown';
-  mouseTarget = '';
-});
-
-mouseTargethealer.addEventListener('mouseenter', e => {
-  mouseTargethealer.style.outline = '5px solid red';
-  mouseTarget='healer';
-});
-mouseTargethealer.addEventListener('mouseleave', e => {
-  mouseTargethealer.style.outline = '0px brown';
-  mouseTarget = '';
-});
-
-//spell
-let spell1cost=20, spell1heal=20
-let spell2cost=10, spell2heal=8
-let spell3cost=100, spell3heal=40
-
-document.addEventListener("keypress", (event) => {
-    if (event.key==='1' && manaCur >= spell1cost) {
-        if (mouseTarget === 'tank') {
-        tankCurHP = Math.min(tankCurHP + spell1heal, tankMaxHP);
-        manaCur = manaCur - spell1cost;
-        }
-        else if (mouseTarget === 'dps1') {
-        dps1CurHP = Math.min(dps1CurHP + spell1heal, dps1MaxHP);
-        manaCur = manaCur - spell1cost;
-        }
-        else if (mouseTarget === 'dps2') {
-        dps2CurHP = Math.min(dps2CurHP + spell1heal, dps2MaxHP);
-        manaCur = manaCur - spell1cost;
-        }
-        else if (mouseTarget === 'dps3') {
-        dps3CurHP = Math.min(dps3CurHP + spell1heal, dps3MaxHP);
-        manaCur = manaCur - spell1cost;
-        }
-        else if (mouseTarget === 'healer') {
-        healerCurHP = Math.min(healerCurHP + spell1heal, healerMaxHP);
-        manaCur = manaCur - spell1cost;
-        }
-        }
-    else if (event.key==='2' && manaCur >= spell2cost) {
-        tankCurHP = Math.min(tankCurHP + spell2heal, tankMaxHP);
-        dps1CurHP = Math.min(dps1CurHP + spell2heal, dps1MaxHP);
-        dps2CurHP = Math.min(dps2CurHP + spell2heal, dps2MaxHP);
-        dps3CurHP = Math.min(dps3CurHP + spell2heal, dps3MaxHP);
-        healerCurHP = Math.min(healerCurHP + spell2heal, healerMaxHP);
-        manaCur = manaCur - spell2cost;
+class Unit {
+    constructor(hpbarID, cssID, hpbarText, maxHP, dps, role) {
+        this.hpbarID = hpbarID;
+        this.cssID = cssID;
+        this.maxHP = maxHP;
+        this.curHP = maxHP;
+        this.hpbarText = hpbarText;
+        this.dps = dps;
+        this.role = role;
     }
-    else if (event.key==='3' && manaCur >= spell3cost) {
-        if (mouseTarget === 'tank') {
-        tankCurHP = Math.min(tankCurHP + spell3heal, tankMaxHP);
-        healerCurHP = Math.min(healerCurHP + spell3heal, healerMaxHP);
-        dps1CurHP = Math.min(dps1CurHP + spell3heal, dps1MaxHP);
-        manaCur = manaCur - spell3cost;
-        }
-        else if (mouseTarget === 'dps1') {
-        tankCurHP = Math.min(tankCurHP + spell3heal, tankMaxHP);
-        dps1CurHP = Math.min(dps1CurHP + spell3heal, dps1MaxHP);
-        dps2CurHP = Math.min(dps2CurHP + spell3heal, dps2MaxHP);
-        manaCur = manaCur - spell3cost;
-        }
-        else if (mouseTarget === 'dps2') {
-        dps1CurHP = Math.min(dps1CurHP + spell3heal, dps1MaxHP);
-        dps2CurHP = Math.min(dps2CurHP + spell3heal, dps2MaxHP);
-        dps3CurHP = Math.min(dps3CurHP + spell3heal, dps3MaxHP);
-        manaCur = manaCur - spell3cost;
-        }
-        else if (mouseTarget === 'dps3') {
-        dps2CurHP = Math.min(dps2CurHP + spell3heal, dps2MaxHP);
-        dps3CurHP = Math.min(dps3CurHP + spell3heal, dps3MaxHP);
-        healerCurHP = Math.min(healerCurHP + spell3heal, healerMaxHP);
-        manaCur = manaCur - spell3cost;
-        }
-        else if (mouseTarget === 'healer') {
-        tankCurHP = Math.min(tankCurHP + spell3heal, tankMaxHP);
-        healerCurHP = Math.min(healerCurHP + spell3heal, healerMaxHP);
-        dps3CurHP = Math.min(dps3CurHP + spell3heal, dps3MaxHP);
-        manaCur = manaCur - spell3cost;
-        }
-        }
+    isAlive() {
+        return this.curHP > 0;
+    }
+}
+class Combat {
+    constructor(boss, players, spells, mana) {
+        this.boss = boss;
+        this.players = players;
+        this.spells = spells;
+        this.mana = mana;
+        this.over = false;
+        this.tank = players.find((player) => { // suggested N of tanks and healers = 1
+            return player.role === 'tank';
+        })
+        this.healer = players.find((player) => {
+            return player.role === 'healer';
+        })
+        this.period = 0;
+        this.onStart();
+    }
+    onStart() {
+        let currentTarget;
+        this.players.forEach((player) => {
+            const mouseTarget = document.getElementById(player.cssID);
+            mouseTarget.addEventListener('mouseenter', () => {
+                mouseTarget.style.outline = '5px solid red';
+                currentTarget = player;
+            });
+            mouseTarget.addEventListener('mouseleave', () => {
+                mouseTarget.style.outline = '0px brown';
+                currentTarget = {};
+            });
+        });
 
-});
+        document.addEventListener("keypress", (event) => {
+            this.spells.forEach((spell) => {
+                if (event.key === spell.hotkey && this.mana.curValue >= spell.cost && this.over === false && currentTarget.curHP > 0) {
+                    spell.castSpell(currentTarget);
+                    this.mana.change(-spell.cost);
+                }
+            })
+        })
+
+        this.refreshID = setInterval(() => {
+            this.onCombat();
+            this.refreshBars();
+        }, 100); //                   declaring refresh frequency
+    }
+    closeCombat() {
+        if (this.healer.curHP <= 0 || this.tank.curHP <= 0 || this.boss.curHP <= 0) {
+            clearInterval(this.refreshID);
+            this.over = true;
+        }
+    }
+    refreshBars() {
+        document.getElementById(this.boss.hpbarID).style.width = `${(this.boss.curHP / this.boss.maxHP) * 100}%`;
+        document.getElementById(this.boss.hpbarText).innerText = `${Math.round(this.boss.curHP / this.boss.maxHP * 100)}%`;
+        this.players.forEach((player) => {
+            document.getElementById(player.hpbarID).style.width = `${(player.curHP / player.maxHP) * 100}%`;
+            document.getElementById(player.hpbarText).innerText = `${Math.round(player.curHP / player.maxHP * 100)}%`;
+        });
+    }
+    onCombat() {
+        let totalDps = 0;
+        this.players.forEach((player) => { //TODO refactor to reduce() later
+            if (player.isAlive()) {
+                totalDps += player.dps;
+            }
+        });
+
+        this.boss.curHP -= totalDps;
+
+        this.tank.curHP -= getRandomInt(1, 12) * 0.01 * this.boss.dps;
+
+        this.period++;
+        if (this.period % 9 === 1) { //                    declaring refresh frequency for random dmg
+            this.players.forEach((player) => {
+                player.curHP -=
+                    2.0 * this.boss.dps * Math.floor(Math.random()*1.2) +
+                    0.5 * this.boss.dps * Math.floor(Math.random()*1.5); //16% 33% (5% 25dmg)
+            });
+        }
+        this.closeCombat();
+    }
+}
+class Mana {
+    constructor(maxValue, barID, barText) {
+        this.maxValue = maxValue;
+        this.curValue = maxValue;
+        this.barID = barID;
+        this.barText = barText;
+    }
+    change(value) {
+        this.curValue = Math.max(Math.min(this.maxValue, this.curValue + value), 0);
+        document.getElementById(this.barID).style.width = `${(this.curValue / this.maxValue) * 100}%`;
+        document.getElementById(this.barText).innerText = `${Math.round(this.curValue / this.maxValue * 100)}%`;
+    }
+}
+class Spell {
+    constructor(cost, value, hotkey) {
+        this.cost = cost;
+        this.value = value;
+        this.hotkey = hotkey;
+    }
+}
+class TargetHeal extends Spell {
+    constructor(cost, value, hotkey) {
+        super(cost, value, hotkey);
+    }
+    castSpell(target) {
+        target.curHP = Math.min(target.curHP + this.value, target.maxHP);
+    }
+}
+class AllHeal extends Spell{
+    constructor(cost, value, hotkey) {
+        super(cost, value, hotkey);
+    }
+    castSpell() {
+        combat.players.forEach((player) => { //can we change this objects??
+            player.curHP = Math.min(player.curHP + this.value, player.maxHP);
+        })
+    }
+}
+class AOEHeal extends Spell{
+    constructor(cost, value, hotkey) {
+        super(cost, value, hotkey);
+    }
+    castSpell(target) {
+        let len = combat.players.length;
+        let leftN = combat.players[(combat.players.indexOf(target)+len-1)%len];
+        let rightN = combat.players[(combat.players.indexOf(target)+1)%len];
+        leftN.curHP = Math.min(leftN.curHP + this.value, leftN.maxHP);
+        rightN.curHP = Math.min(rightN.curHP + this.value, rightN.maxHP);
+        target.curHP = Math.min(target.curHP + this.value, target.maxHP);
+        }
+}
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min; //including max
+}
+
+const mana = new Mana(2300, 'progressBarFull-mana', 'text-mana')
+const boss = new Unit('progressBarFull-boss', 'bar1', 'text-boss',8000, 10, 'boss');
+const tank = new Unit('progressBarFull-tank', 'bar2', 'text-tank',200, 1, 'tank');
+const dps1 = new Unit('progressBarFull-dps1', 'bar3', 'text-dps1',100, 3, 'dps');
+const dps2 = new Unit('progressBarFull-dps2', 'bar4', 'text-dps2',100, 3, 'dps');
+const dps3 = new Unit('progressBarFull-dps3', 'bar5', 'text-dps3',100, 3, 'dps');
+const healer = new Unit('progressBarFull-healer', 'bar6', 'text-healer',100, 0, 'healer');
+const healTarget = new TargetHeal (20, 18, '1');
+const healAll = new AllHeal(10,5,'2');
+const healAOE = new AOEHeal(100,40,'3');
+
+let combat = new Combat(boss, [tank, dps1, dps2, dps3, healer], [healTarget, healAll, healAOE], mana)

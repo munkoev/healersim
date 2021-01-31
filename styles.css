@@ -7,36 +7,20 @@
   grid-gap: 10px;
   grid-auto-rows: minmax(100px, auto);
 }
-.bar-boss {
-  background-color: none;
-}
-.bar-tank {
-  background-color: none;
-}
-.bar-dps {
-  background-color: none;
-}
-.bar-healer {
-  background-color: none;
-}
-.bar-mana {
-  background-color: none;
-  color: white;
-}
 [class^=bar] {
   padding: 20px;
-  border: 0px solid blue;
+  border: 0 solid blue;
   text-align: center;
   align-self: center;
 }
 .spell {
   background-color: gold;
-  padding: 0px;
+  padding: 0;
   text-align: left;
   align-self: start;
   border: 1px solid blue;
 }
-.chatwindow {
+.chatWindow {
   background-color: white;
   padding: 20px;
     text-align: left;
@@ -51,61 +35,61 @@ body {
 #progressBar-boss {
     width: auto;
     height: 4rem;
-    border: 0rem brown;
-    margin-top: 0rem;
+    border: 0 brown;
+    margin-top: 0;
     background-color: #FF7F50;
 }
 #progressBarFull-boss {
     height: 4rem;
     background-color: brown;
-    width: 0%;
+    width: 100%;
 }
 #progressBar-tank {
     width: auto;
     height: 4rem;
-    border: 0rem brown;
-    margin-top: 0rem;
+    border: 0 brown;
+    margin-top: 0;
     background-color: Moccasin;
 }
 #progressBarFull-tank {
     height: 4rem;
     background-color: olive;
-    width: 0%;
+    width: 100%;
 }
 [id^=progressBar-dps] {
     width: auto;
     height: 4rem;
-    border: 0rem brown;
-    margin-top: 0rem;
+    border: 0 brown;
+    margin-top: 0;
     background-color: DarkSeaGreen;
 }
 [id^=progressBarFull-dps] {
     height: 4rem;
     background-color: ForestGreen;
-    width: 0%;
+    width: 100%;
 }
 #progressBar-healer {
     width: auto;
     height: 4rem;
-    border: 0rem brown;
-    margin-top: 0rem;
+    border: 0 brown;
+    margin-top: 0;
     background-color: LightSteelBlue;
 }
 #progressBarFull-healer {
     height: 4rem;
     background-color: LightSlateGray;
-    width: 0%;
+    width: 100%;
 }
 
 #progressBar-mana {
     width: auto;
     height: 4rem;
-    border: 0rem brown;
-    margin-top: 0rem;
+    border: 0 brown;
+    margin-top: 0;
     background-color: Gainsboro;
 }
 #progressBarFull-mana {
     height: 4rem;
     background-color: DarkSlateBlue;
-    width: 0%;
+    width: 0;
 }
