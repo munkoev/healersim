@@ -91,5 +91,5 @@ body {
 #progressBarFull-mana {
     height: 4rem;
     background-color: DarkSlateBlue;
-    width: 0;
+    width: 100%;
 }
